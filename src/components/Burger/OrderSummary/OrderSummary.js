@@ -1,33 +1,30 @@
-import React from "react";
-import Auxiliary from "../../../hoc/Auxiliary";
-import Button from "../../UI/Button/Button";
+import React from 'react';
 
-const orderSummary = props => {
-  const ingredientsSummary = Object.keys(props.ingredients).map(igKey => {
+import Auxiliary from '../../../hoc/Auxiliary';
+import Button from '../../UI/Button/Button';
+
+const orderSummary = ( props ) => {
+    const ingredientSummary = Object.keys( props.ingredients )
+        .map( igKey => {
+            return (
+                <li key={igKey}>
+                    <span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {props.ingredients[igKey]}
+                </li> );
+        } );
+
     return (
-      <li key={igKey}>
-        <span style={{ textTransform: "capitalize" }}>{igKey}</span>:
-        {props.ingredients[igKey]}
-      </li>
+        <Auxiliary>
+            <h3>Your Order</h3>
+            <p>A delicious burger with the following ingredients:</p>
+            <ul>
+                {ingredientSummary}
+            </ul>
+            <p><strong>Total Price: {props.price.toFixed(2)}</strong></p>
+            <p>Continue to Checkout?</p>
+            <Button btnType="Danger" clicked={props.purchaseCancelled}>CANCEL</Button>
+            <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
+        </Auxiliary>
     );
-  });
-  return (
-    <Auxiliary>
-      <h3>Your Order</h3>
-      <p>Τα υλικά που επιλέξατε είναι: </p>
-      <ul>{ingredientsSummary}</ul>
-      <p>Το συνολικό κόστος είναι <strong>{props.totalPrice.toFixed(2)}</strong></p>
-      <p>Continue to Checkout ? </p>
-      <span style={{textAlign: 'center'}}>
-        <Button clicked={props.purchaseCanceled} btnType="Danger">
-          CANCEL
-        </Button>
-        <Button clicked={props.purchaseContinue} btnType="Success">
-          CONTINUE
-        </Button>
-      </span>
-    </Auxiliary>
-  );
 };
 
 export default orderSummary;
