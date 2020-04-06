@@ -10,7 +10,7 @@ import './Blog.css';
 class Blog extends Component {
     state = {
         posts: [],
-        selectedPost: 1
+        selectedPost: null
     }
 
     componentDidMount() {
@@ -24,14 +24,15 @@ class Blog extends Component {
                     }
                 })
                 this.setState({ posts: updatedPosts });
-                console.log(response);
+                // console.log(response);
             });
     }
 
     clicked = (id) => { 
-        console.log("eimai edw");
-        console.log("ID is: "+ id);
-        console.log(id);
+        this.setState({selectedPost: id});
+        // console.log("eimai edw");
+        // console.log("ID is: "+ id);
+        // console.log(id);
     }
 
     render() {
